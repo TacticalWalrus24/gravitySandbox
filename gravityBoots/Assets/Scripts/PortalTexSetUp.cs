@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PortalTexSetUp : MonoBehaviour
 {
+    [Header("Link 1")]
     [SerializeField]
     Camera camA;
     [SerializeField]
@@ -12,6 +13,16 @@ public class PortalTexSetUp : MonoBehaviour
     Camera camB;
     [SerializeField]
     Material camB_Mat;
+
+    [Header("Link 2")]
+    [SerializeField]
+    Camera camC;
+    [SerializeField]
+    Material camC_Mat;
+    [SerializeField]
+    Camera camD;
+    [SerializeField]
+    Material camD_Mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +41,22 @@ public class PortalTexSetUp : MonoBehaviour
 
         camB.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
         camB_Mat.mainTexture = camB.targetTexture;
+
+
+        if (camC.targetTexture != null)
+        {
+            camC.targetTexture.Release();
+        }
+
+        camC.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        camC_Mat.mainTexture = camC.targetTexture;
+
+        if (camD.targetTexture != null)
+        {
+            camD.targetTexture.Release();
+        }
+
+        camD.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        camD_Mat.mainTexture = camD.targetTexture;
     }
 }
