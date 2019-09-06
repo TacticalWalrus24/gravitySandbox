@@ -85,15 +85,17 @@ public class PlayerRot : MonoBehaviour
             }
         }
 
-        // movement code - turn left/right with Horizontal axis:
-        //myTransform.Rotate(0, Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime, 0);
-        //cam.transform.Rotate(-Input.GetAxis("Mouse Y") * turnSpeed * Time.deltaTime, 0, 0);
+        
         // update surface normal and isGrounded:
         ray = new Ray(myTransform.position, -myNormal); // cast ray downwards
         if (Physics.Raycast(ray, out hit))
         { // use it to update myNormal and isGrounded
             isGrounded = hit.distance <= distGround + deltaGround;
             surfaceNormal = hit.normal;
+            if (hit.transform.GetComponent<Rigidbody>() != null)
+            {
+                hit.transform.GetComponent<Rigidbody>().AddForce(-gravity * GetComponent<Rigidbody>().mass * -myNormal);
+            }
         }
         else
         {
